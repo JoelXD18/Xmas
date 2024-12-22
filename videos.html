@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Videos</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to bottom, #001f3f, #0074d9);
+      overflow: hidden;
+    }
+
+    /* Fondo de copos de nieve */
+    .snowflake {
+      position: absolute;
+      top: -10px;
+      color: white;
+      font-size: 1rem;
+      animation: fall linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+      }
+    }
+
+    /* Contenedores para los videos */
+    .video-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      width: 90%;
+      max-width: 1000px;
+      margin-top: 20%;
+      padding: 20px;
+      justify-items: center;
+    }
+
+    .video-box {
+      width: 100%;
+      max-width: 300px;
+      height: 200px;
+      border-radius: 10px;
+      background-color: white;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+    }
+
+    .video-box video {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+    }
+
+    /* Estilos para la carta */
+    .card {
+      position: absolute;
+      bottom: 15%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70%;
+      max-width: 500px;
+      background: #f4e1d2;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .card.open {
+      transform: scale(1.1);
+    }
+
+    /* Texto dentro de la carta */
+    .card-text {
+      display: none;
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: #333;
+      text-align: center;
+    }
+
+    /* Botón de regreso */
+    .back-button {
+      position: absolute;
+      bottom: 5%;
+      padding: 10px 20px;
+      background: #0074d9;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    .back-button:hover {
+      background: #005fa3;
+    }
+
+    /* Estilos responsivos para móviles */
+    @media (max-width: 600px) {
+      .video-container {
+        grid-template-columns: 1fr 1fr;
+        margin-top: 10%;
+      }
+
+      .card {
+        width: 90%;
+        bottom: 10%;
+      }
+
+      .back-button {
+        font-size: 1rem;
+        padding: 8px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Copos de nieve -->
+  <div id="snow-container"></div>
+
+  <!-- Contenedores para los videos -->
+  <div class="video-container">
+    <div class="video-box">
+      <video controls>
+        <source src="v0f044gc0000ct8u92vog65t9teulj80.mp4" type="video/mp4">
+        Tu navegador no soporta este formato de video.
+      </video>
+    </div>
+    <div class="video-box">
+      <video controls>
+        <source src="v12044gd0000ctb3etfog65i9b9m02a0.mp4" type="video/mp4">
+        Tu navegador no soporta este formato de video.
+      </video>
+    </div>
+    <div class="video-box">
+      <video controls>
+        <source src="video3.mp4" type="video/mp4">
+        Tu navegador no soporta este formato de video.
+      </video>
+    </div>
+    <div class="video-box">
+      <video controls>
+        <source src="video4.mp4" type="video/mp4">
+        Tu navegador no soporta este formato de video.
+      </video>
+    </div>
+    <div class="video-box">
+      <video controls>
+        <source src="video5.mp4" type="video/mp4">
+        Tu navegador no soporta este formato de video.
+      </video>
+    </div>
+    <div class="video-box">
+      <video controls>
+        <source src="video6.mp4" type="video/mp4">
+        Tu navegador no soporta este formato de video.
+      </video>
+    </div>
+  </div>
+
+  <!-- Carta que se abre al hacer clic -->
+  <div class="card" id="card">
+    <h3>Haz clic para ver el mensaje</h3>
+    <div class="card-text" id="card-text">
+      <p>Espero que te haya gustado mi regalo, no se vale lloriqueos que se que lloras por todo JSJSJS. Feliz Navidad! 🤍🎁</p>
+    </div>
+  </div>
+
+  <!-- Botón de regreso a la página principal -->
+  <button class="back-button" onclick="window.location.href='index.html'">Regresar a la Página Principal</button>
+
+  <script>
+    // Animación de copos de nieve
+    const snowContainer = document.getElementById('snow-container');
+
+    function createSnowflake() {
+      const snowflake = document.createElement('div');
+      snowflake.classList.add('snowflake');
+      snowflake.textContent = '❄';
+      snowflake.style.left = Math.random() * 100 + 'vw';
+      snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+      snowflake.style.animationDuration = Math.random() * 5 + 5 + 's';
+      snowContainer.appendChild(snowflake);
+
+      setTimeout(() => {
+        snowflake.remove();
+      }, 10000);
+    }
+
+    setInterval(createSnowflake, 200);
+
+    // Función para abrir la carta
+    const card = document.getElementById('card');
+    const cardText = document.getElementById('card-text');
+
+    card.addEventListener('click', () => {
+      card.classList.toggle('open');
+      cardText.style.display = cardText.style.display === 'none' ? 'block' : 'none';
+    });
+  </script>
+
+</body>
+</html>
